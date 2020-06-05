@@ -16,9 +16,7 @@ namespace Relacion1a1.Datos
     {
         public int IdEmpleado { get; set; }
         public string Nombre { get; set; }
-        public Nullable<int> IdDireccion { get; set; }
     
         public virtual Direccion Direccion { get; set; }
-        public virtual Direccion Direccion1 { get; set; }
     }
 }

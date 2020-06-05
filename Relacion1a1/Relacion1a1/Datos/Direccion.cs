@@ -14,17 +14,9 @@ namespace Relacion1a1.Datos
     
     public partial class Direccion
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Direccion()
-        {
-            this.Empleado = new HashSet<Empleado>();
-        }
-    
         public int IdEmpleado { get; set; }
         public string Calle { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Empleado> Empleado { get; set; }
-        public virtual Empleado Empleado1 { get; set; }
+        public virtual Empleado Empleado { get; set; }
     }
 }

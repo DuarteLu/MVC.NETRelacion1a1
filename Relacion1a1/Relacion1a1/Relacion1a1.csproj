@@ -134,10 +134,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>db.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Datos\db.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>db.tt</DependentUpon>
+    </Compile>
     <Compile Include="Datos\db.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>db.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Direccion.cs">
+      <DependentUpon>db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Empleado.cs">
+      <DependentUpon>db.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -152,6 +163,12 @@
     <Content Include="Datos\db.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>db.Context.cs</LastGenOutput>
+      <DependentUpon>db.edmx</DependentUpon>
+    </Content>
+    <Content Include="Datos\db.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>db.edmx</DependentUpon>
+      <LastGenOutput>db.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -162,9 +179,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>db.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Datos\db.edmx.diagram">
+    <Content Include="Datos\db.edmx.diagram">
       <DependentUpon>db.edmx</DependentUpon>
-    </None>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

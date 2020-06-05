@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Relacion1a1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Relacion1a1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Direccion">
           <Key>
             <PropertyRef Name="IdEmpleado" />
@@ -18,20 +18,7 @@
           </Key>
           <Property Name="IdEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
-          <Property Name="IdDireccion" Type="int" />
         </EntityType>
-        <Association Name="fk_idDireccion">
-          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Direccion">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Empleado">
-              <PropertyRef Name="IdDireccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_idEmpleado">
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
           <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
@@ -47,28 +34,30 @@
         <EntityContainer Name="Relacion1a1ModelStoreContainer">
           <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="fk_idDireccion" Association="Self.fk_idDireccion">
-            <End Role="Direccion" EntitySet="Direccion" />
-            <End Role="Empleado" EntitySet="Empleado" />
-          </AssociationSet>
           <AssociationSet Name="fk_idEmpleado" Association="Self.fk_idEmpleado">
             <End Role="Empleado" EntitySet="Empleado" />
             <End Role="Direccion" EntitySet="Direccion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Relacion1a1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Relacion1a1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Direccion" EntityType="Relacion1a1Model.Direccion" />
+          <EntitySet Name="Empleado" EntityType="Relacion1a1Model.Empleado" />
+          <AssociationSet Name="fk_idEmpleado" Association="Relacion1a1Model.fk_idEmpleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Direccion">
           <Key>
             <PropertyRef Name="IdEmpleado" />
           </Key>
           <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
           <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Empleado" Relationship="Self.fk_idDireccion" FromRole="Direccion" ToRole="Empleado" />
-          <NavigationProperty Name="Empleado1" Relationship="Self.fk_idEmpleado" FromRole="Direccion" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado" Relationship="Relacion1a1Model.fk_idEmpleado" FromRole="Direccion" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -76,25 +65,11 @@
           </Key>
           <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdDireccion" Type="Int32" />
-          <NavigationProperty Name="Direccion" Relationship="Self.fk_idDireccion" FromRole="Empleado" ToRole="Direccion" />
-          <NavigationProperty Name="Direccion1" Relationship="Self.fk_idEmpleado" FromRole="Empleado" ToRole="Direccion" />
+          <NavigationProperty Name="Direccion" Relationship="Relacion1a1Model.fk_idEmpleado" FromRole="Empleado" ToRole="Direccion" />
         </EntityType>
-        <Association Name="fk_idDireccion">
-          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Direccion">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Empleado">
-              <PropertyRef Name="IdDireccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_idEmpleado">
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
-          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Type="Relacion1a1Model.Empleado" Role="Empleado" Multiplicity="1" />
+          <End Type="Relacion1a1Model.Direccion" Role="Direccion" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="IdEmpleado" />
@@ -104,18 +79,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Relacion1a1Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Direccion" EntityType="Self.Direccion" />
-          <EntitySet Name="Empleado" EntityType="Self.Empleado" />
-          <AssociationSet Name="fk_idDireccion" Association="Self.fk_idDireccion">
-            <End Role="Direccion" EntitySet="Direccion" />
-            <End Role="Empleado" EntitySet="Empleado" />
-          </AssociationSet>
-          <AssociationSet Name="fk_idEmpleado" Association="Self.fk_idEmpleado">
-            <End Role="Empleado" EntitySet="Empleado" />
-            <End Role="Direccion" EntitySet="Direccion" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -125,17 +88,16 @@
           <EntitySetMapping Name="Direccion">
             <EntityTypeMapping TypeName="Relacion1a1Model.Direccion">
               <MappingFragment StoreEntitySet="Direccion">
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Empleado">
             <EntityTypeMapping TypeName="Relacion1a1Model.Empleado">
               <MappingFragment StoreEntitySet="Empleado">
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdDireccion" ColumnName="IdDireccion" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
